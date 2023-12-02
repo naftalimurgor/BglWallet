@@ -23,7 +23,7 @@ const ImportExistingWallet = () => {
             </View>
             <View style={styles.createWalletForm}>
                 <Text style={styles.inputLabel}>
-                    Seedphrase/Mnemomonic
+                    Seedphrase/Mnemonic
                 </Text>
                 <TextInput style={styles.passwordInput} placeholder='Paste wallet seed phrase' placeholderTextColor={COLORS.WHITE003} />
                 <Text style={styles.inputLabel}>
@@ -34,7 +34,7 @@ const ImportExistingWallet = () => {
                 <Text style={styles.walletText}>
                     🔒 Keep this password safe as it will be used to keep your wallet safe on this device.
                 </Text>
-                <View style={styles.submitButtonContainer}>
+                <View>
                     <Pressable style={styles.submitButton} onPress={() => alert('Im in!')}>
                         <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
                     </Pressable>
