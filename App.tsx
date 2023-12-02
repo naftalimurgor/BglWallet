@@ -7,6 +7,7 @@ import OnboardingStepTwo from '@/app/screens/OnboardingStepTwo';
 import OnboardingStepThree from '@/app/screens/OnboardScreenThree';
 import CreateNewWallet from '@/app/screens/CreateNewWallet';
 import ImportExistingWallet from '@/app/screens/ImportExistingWallet';
+import Home from '@/app/screens/Home';
 
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
     // <OnboardingStepTwo/>
     // <OnboardingStepThree/>
     // <CreateNewWallet/>
-    <ImportExistingWallet/>
+    // <ImportExistingWallet/>
+    <Home/>
   );
 }
