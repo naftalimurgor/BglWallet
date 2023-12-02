@@ -4,6 +4,8 @@ export const COLORS = {
     WHITEOO1: '#F5F5F5',
     WHITE002: '#AAAAAA',
     WHITE003: '#888888',
-    BLACK: '#232631',
+    WHITE004: '#DDDDDD',
+    BLACK_ACCENT: '#232631',
+    BLACK: '#000000'
 
 }
