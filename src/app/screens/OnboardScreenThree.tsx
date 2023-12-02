@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     onboardHeading: {
-        color: COLORS.BLACK,
+        color: COLORS.BLACK_ACCENT,
         fontWeight: 'bold',
         fontSize: 28,
         fontFamily: 'Poppins_700Bold'
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
 
     },
     onboardButton: {
-        backgroundColor: COLORS.BLACK,
+        backgroundColor: COLORS.BLACK_ACCENT,
         width: 140,
         height: 50,
         borderRadius: 11,

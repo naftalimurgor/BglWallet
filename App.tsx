@@ -5,6 +5,7 @@ import WelcomeWalkThrough from '@/app/screens/WelcomeWalkThrough';
 import OnboardingStepOne from '@/app/screens/OnboardingStepOne';
 import OnboardingStepTwo from '@/app/screens/OnboardingStepTwo';
 import OnboardingStepThree from '@/app/screens/OnboardScreenThree';
+import CreateNewWallet from '@/app/screens/CreateNewWallet';
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
     // <WelcomeWalkThrough/>
     // <OnboardingStepOne/>
     // <OnboardingStepTwo/>
-    <OnboardingStepThree/>
+    // <OnboardingStepThree/>
+    <CreateNewWallet/>
   );
 }
