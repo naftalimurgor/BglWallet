@@ -51,11 +51,13 @@ const styles = StyleSheet.create({
     ctaHeadingText: {
         fontSize: 24,
         marginBottom: 20,
+        fontWeight: 'bold',
         fontFamily: 'Poppins_600SemiBold',
         color: COLORS.WHITE
     },
     welcomeText: {
         color: COLORS.WHITE,
+        fontWeight: 'normal',
         fontSize: 14,
         fontFamily: 'Poppins_500Medium'
     }
