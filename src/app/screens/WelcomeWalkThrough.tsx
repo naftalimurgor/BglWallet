@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '../COLORS'
-import SplashLogo from '../../components/SplashLogo'
+import { COLORS } from '@/app/COLORS'
+import SplashLogo from '@/components/SplashLogo'
 import { useFonts } from 'expo-font'
 import { Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins'
 
@@ -18,10 +18,10 @@ export default function WelcomeWalkThrough() {
                 <SplashLogo />
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.ctaHeadingText}>
+                <Text style={[styles.ctaHeadingText,{fontFamily: ''}]}>
                     Welcome to Our Bitgesell Mobile Wallet
                 </Text>
-                <Text style={styles.welcomeText}>
+                <Text style={[styles.welcomeText, {fontFamily: ''}]}>
                     Welcome to Bitgesell Wallet
                     –Start managing your digital assets with ease and confidence.
                 </Text>

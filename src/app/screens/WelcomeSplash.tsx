@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '../COLORS'
-import SplashLogo from '../../components/SplashLogo'
+import { COLORS } from '@/app/COLORS'
+import SplashLogo from '@/components/SplashLogo'
 import { useFonts } from 'expo-font'
 import { Poppins_500Medium } from '@expo-google-fonts/poppins'
 

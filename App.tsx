@@ -1,11 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import WelcomeSplash from './src/app/screens/WelcomeSplash';
-import WelcomeWalkThrough from './src/app/screens/WelcomeWalkThrough';
+import WelcomeSplash from '@/app/screens/WelcomeSplash';
+import WelcomeWalkThrough from '@/app/screens/WelcomeWalkThrough';
+import OnboardingStepOne from '@/app/screens/OnboardingStepOne';
+import OnboardingStepTwo from '@/app/screens/OnboardingStepTwo';
+import OnboardingStepThree from '@/app/screens/OnboardScreenThree';
+
 
 export default function App() {
   return (
     // <WelcomeSplash/>
-    <WelcomeWalkThrough/>
+    // <WelcomeWalkThrough/>
+    // <OnboardingStepOne/>
+    // <OnboardingStepTwo/>
+    <OnboardingStepThree/>
   );
 }
