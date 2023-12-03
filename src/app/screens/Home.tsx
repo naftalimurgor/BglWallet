@@ -62,7 +62,7 @@ export default function Home() {
                     }}
                 />
             </View>
-           
+
             <View style={styles.navContainer}>
                 <View style={styles.navButtonContainer}>
                     <Pressable style={styles.navButton}>
@@ -101,11 +101,19 @@ export default function Home() {
                             <Text style={styles.assetText}>
                                 BITGESELL
                             </Text>
-                            <Text style={styles.assetSymbol}>
+                            <Text style={[styles.assetSymbol, {marginLeft: 10}]}>
                                 BGL
                             </Text>
                         </View>
 
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontWeight: '600', fontSize: 13, color: COLORS.BLACK }}>
+                            $7,367.78
+                        </Text>
+                        <Text style={{ fontWeight: '300', fontSize: 12, color: '#888888'}}>
+                            +2.32%
+                        </Text>
                     </View>
                 </View>
             </View>
@@ -234,6 +242,9 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     bglContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
         backgroundColor: '#F5F5F5',
         height: 80,
         borderRadius: 15,
@@ -242,6 +253,7 @@ const styles = StyleSheet.create({
     assetTextContainer: {
     },
     assetText: {
+        alignItems: 'baseline',
         fontWeight: '600',
         fontSize: 16,
         paddingTop: 21,
@@ -250,8 +262,7 @@ const styles = StyleSheet.create({
     assetSymbol: {
         flexDirection: 'row',
         alignContent: 'center',
-        alignItems: 'flex-end',
-        paddingLeft: 15
-
+        alignItems: 'center',
+        // paddingLeft: 15
     },
 })
