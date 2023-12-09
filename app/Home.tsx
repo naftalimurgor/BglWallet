@@ -1,6 +1,6 @@
 import { ImageBackground, Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import React, { useState } from 'react'
-import { COLORS } from '../COLORS'
+import { COLORS } from './COLORS'
 import { Poppins_700Bold } from '@expo-google-fonts/poppins'
 import { useFonts } from 'expo-font'
 import { Dropdown } from 'react-native-element-dropdown'

@@ -1,12 +1,13 @@
-import IsometricTwo from '@/components/IsometricTwo'
-import SliderDots from '@/components/SliderDots'
-import { Poppins_300Light, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins'
-import { useFonts } from '@expo-google-fonts/poppins/useFonts'
-import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { COLORS } from '../COLORS'
+import React from 'react'
+import { COLORS } from './COLORS'
+import { useFonts } from '@expo-google-fonts/poppins/useFonts'
+import { Poppins_700Bold, Poppins_300Light, Poppins_400Regular, Poppins_500Medium } from '@expo-google-fonts/poppins'
+import IsometricLogo from '@/components/IsometricOne'
+import SliderDots from '@/components/SliderDots'
+import IsometricThree from '@/components/IsometricThree'
 
-const OnboardingStepTwo = () => {
+const OnboardingStepOne = () => {
     // Loads non-system font asynchronously, set as fontFamily: 'Poppins_500Medium'
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -25,22 +26,23 @@ const OnboardingStepTwo = () => {
 
             <View style={styles.isometricContainer}>
                 <View>
-                    <IsometricTwo />
+                    <IsometricThree />
                 </View>
             </View>
 
             <View style={styles.onboardTextContainer}>
                 <Text style={[styles.onboardHeading, { fontFamily: '' }]}>
-                    Manage all your
-                    assets in one place
+                    Keep your wallet
+                    app up to date
                 </Text>
                 <Text style={[styles.onboardingText, { fontFamily: '' }]}>
-                    Unlock the power of our crypto wallet app! Seamlessly manage all your assets in one secure place.                </Text>
+                    Regularly update your wallet software to ensure you have the latest security patches and bug fixes.
+                </Text>
             </View>
 
             <View style={styles.footerContainer}>
                 <View>
-                    <SliderDots screenCount={2} />
+                    <SliderDots screenCount={3} />
                 </View>
                 <View>
                     <Pressable style={styles.onboardButton}>
@@ -53,7 +55,7 @@ const OnboardingStepTwo = () => {
     )
 }
 
-export default OnboardingStepTwo
+export default OnboardingStepOne
 
 const styles = StyleSheet.create({
     onboardingContainer: {

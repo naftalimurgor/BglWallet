@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '../COLORS'
+import { COLORS } from './COLORS'
 import { useFonts } from '@expo-google-fonts/poppins/useFonts'
 import { Poppins_700Bold, Poppins_300Light, Poppins_400Regular, Poppins_500Medium } from '@expo-google-fonts/poppins'
 import IsometricLogo from '@/components/IsometricOne'

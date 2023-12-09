@@ -1,15 +1,14 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '@/app/COLORS'
+import { COLORS } from 'app/COLORS'
 import SplashLogo from '@/components/SplashLogo'
 import { useFonts } from 'expo-font'
-import { Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { Poppins_500Medium } from '@expo-google-fonts/poppins'
 
-export default function WelcomeWalkThrough() {
+export default function WelcomeSplash() {
     // Loads non-system font asynchronously, set as fontFamily: 'Poppins_500Medium'
     const [fontsLoaded] = useFonts({
-        Poppins_500Medium, 
-        Poppins_700Bold
+        Poppins_500Medium
     })
 
     return (
@@ -18,12 +17,8 @@ export default function WelcomeWalkThrough() {
                 <SplashLogo />
             </View>
             <View style={styles.textContainer}>
-                <Text style={[styles.ctaHeadingText,{fontFamily: ''}]}>
-                    Welcome to Our Bitgesell Mobile Wallet
-                </Text>
-                <Text style={[styles.welcomeText, {fontFamily: ''}]}>
-                    Welcome to Bitgesell Wallet
-                    –Start managing your digital assets with ease and confidence.
+                <Text style={styles.welcomeText}>
+                    Welcome to our new crypto wallet mobile app
                 </Text>
             </View>
         </View>
@@ -39,25 +34,15 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '40%'
+        alignItems: 'center'
     },
     textContainer: {
-        flex: 0.6,
+        flex: 0.3,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: '50%'
-    },
-    ctaHeadingText: {
-        fontSize: 24,
-        marginBottom: 20,
-        fontWeight: 'bold',
-        fontFamily: 'Poppins_600SemiBold',
-        color: COLORS.WHITE
+        alignItems: 'center'
     },
     welcomeText: {
         color: COLORS.WHITE,
-        fontWeight: 'normal',
         fontSize: 14,
         fontFamily: 'Poppins_500Medium'
     }
