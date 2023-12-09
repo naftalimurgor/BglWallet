@@ -13,7 +13,6 @@ const userIcon = require('@/assets/user.png')
 const copyIcon = require('@/assets/copy.png')
 const bitgesellIcon = require('@/assets/bitgesell.png')
 
-
 export default function Home() {
     const [fontsLoaded] = useFonts({
         Poppins_700Bold
