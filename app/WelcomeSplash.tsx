@@ -9,7 +9,6 @@ interface Props {
     onLayout:((event: LayoutChangeEvent) => void) | undefined
 }
 export default function WelcomeSplash({onLayout}: Props) {
-    // Loads non-system font asynchronously, set as fontFamily: 'Poppins_500Medium'
     const [fontsLoaded] = useFonts({
         Poppins_500Medium
     })
