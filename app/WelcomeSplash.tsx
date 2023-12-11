@@ -6,7 +6,7 @@ import { useFonts } from 'expo-font'
 import { Poppins_500Medium } from '@expo-google-fonts/poppins'
 
 interface Props {
-    onLayout:((event: LayoutChangeEvent) => void) | undefined
+    onLayout:((event: LayoutChangeEvent) => void)
 }
 export default function WelcomeSplash({onLayout}: Props) {
     const [fontsLoaded] = useFonts({
