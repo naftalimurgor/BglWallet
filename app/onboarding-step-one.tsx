@@ -5,6 +5,8 @@ import { useFonts } from '@expo-google-fonts/poppins/useFonts'
 import { Poppins_700Bold, Poppins_300Light, Poppins_400Regular, Poppins_500Medium } from '@expo-google-fonts/poppins'
 import IsometricLogo from '@/components/IsometricOne'
 import SliderDots from '@/components/SliderDots'
+import { StatusBar } from 'expo-status-bar'
+import { router } from 'expo-router'
 
 const OnboardingStepOne = () => {
     // Loads non-system font asynchronously, set as fontFamily: 'Poppins_500Medium'
@@ -17,8 +19,11 @@ const OnboardingStepOne = () => {
 
     return (
         <View style={styles.onboardingContainer}>
+            <StatusBar hidden={true} />
             <View style={styles.skipContainer}>
-                <Pressable onPress={() => alert('skip!')}>
+                <Pressable onPress={() => {
+                    router.replace('/create-new-wallet')
+                }}>
                     <Text style={[styles.skippButtonText, { fontFamily: '' }]}>Skip</Text>
                 </Pressable>
             </View>
@@ -44,7 +49,9 @@ const OnboardingStepOne = () => {
                     <SliderDots screenCount={2} />
                 </View>
                 <View>
-                    <Pressable style={styles.onboardButton}>
+                    <Pressable style={styles.onboardButton} onPress={()=> {
+                        router.push('/onboarding-step-two')
+                    }}>
                         <Text style={[styles.onboardButtonText, { fontFamily: '' }]}>Continue</Text>
                     </Pressable>
                 </View>

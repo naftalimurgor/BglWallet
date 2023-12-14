@@ -35,7 +35,6 @@ export default function App() {
       <WelcomeSplash onLayout={onLayoutRootView}/>
   )
   // <WelcomeWalkThrough/>
-  // <OnboardingStepOne/>
   // <OnboardingStepTwo/>
   // <OnboardingStepThree/>
   // <CreateNewWallet/>
