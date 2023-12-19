@@ -1,8 +1,10 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { COLORS } from 'app/COLORS'
 import { useFonts } from '@expo-google-fonts/poppins/useFonts'
 import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { Feather } from '@expo/vector-icons'
+import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
 
 const CreateNewWallet = () => {
@@ -11,10 +13,15 @@ const CreateNewWallet = () => {
     Poppins_700Bold
   })
 
+  const [password, setPassword] = useState<string>()
+  const [email, setEmail] = useState<string>()
+
+  const [secure, setSecure] = useState<boolean>(true)
   return (
     <View style={styles.createWalletContainer}>
+      <StatusBar hidden={true} />
       <View style={styles.walletTextContainer}>
-        <Text style={styles.walletContainerHeading}>
+        <Text style={[styles.walletContainerHeading, { fontFamily: fontsLoaded ? 'Poppins_600SemiBold' : '' }]}>
           Create New Wallet
         </Text>
         <Text style={styles.walletText}>
@@ -23,16 +30,48 @@ const CreateNewWallet = () => {
         </Text>
       </View>
       <View style={styles.createWalletForm}>
-        <Text style={styles.inputLabel}>
+      <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
+          Enter Email
+        </Text>
+        <TextInput
+            style={styles.passwordInput}
+         autoCorrect={false}
+            onChangeText={(text) => {
+              setPassword(text)
+            }}
+          />
+
+        <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
           Enter Password
         </Text>
-        <TextInput style={styles.passwordInput} textContentType='password' />
+
+        <View style={styles.passwordInputContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            textContentType='password'
+            secureTextEntry={secure}
+            autoCorrect={false}
+            onChangeText={(text) => {
+              setPassword(text)
+            }}
+          />
+          <Feather
+            name={secure ? "eye": "eye-off"}
+            size={24}
+            onPress={() => {
+              setSecure((secure) => !secure)
+            }}
+            color="black"
+            style={{ marginLeft: -32, marginBottom: 40, }}
+          />
+
+        </View>
         <Text style={styles.walletText}>
           🔒 Keep this password safe as it will be used to keep your wallet safe on this device.
         </Text>
         <View style={styles.submitButtonContainer}>
           <Pressable style={styles.submitButton} onPress={() => {
-            router.push('/home')
+            router.push('/(home)/')
           }}>
             <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
           </Pressable>
@@ -58,8 +97,8 @@ const styles = StyleSheet.create({
   walletContainerHeading: {
     color: COLORS.BLACK_ACCENT,
     fontSize: 30,
-    fontWeight: '700', // Semibold in figma is kinda "bold" in code 
-    fontFamily: 'Poppins_600SemiBold', // @todo: load async
+    fontWeight: '700',
+    fontFamily: 'Poppins_600SemiBold',
     marginBottom: 22
   },
   walletText: {
@@ -74,6 +113,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
 
   },
+  passwordInputContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  
   inputLabel: {
     color: COLORS.BLACK,
     fontSize: 14,
@@ -83,9 +129,10 @@ const styles = StyleSheet.create({
   },
   passwordInput: {
     width: 335,
+    fontSize: 16,
     height: 81,
     marginLeft: 12,
-    marginRight: 28,
+    // marginRight: 28,
     borderBottomColor: COLORS.WHITE004,
     borderStyle: 'solid',
     borderWidth: 2,
@@ -94,8 +141,6 @@ const styles = StyleSheet.create({
     borderLeftColor: COLORS.WHITE,
     borderRightColor: COLORS.WHITE,
     marginBottom: 40
-
-
   },
 
   submitButton: {
@@ -112,6 +157,6 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   submitButtonContainer: {
-    marginTop: 158
+    // marginTop: 158
   }
 })

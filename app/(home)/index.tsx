@@ -1,6 +1,6 @@
 import { ImageBackground, Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import React, { useState } from 'react'
-import { COLORS } from './COLORS'
+import { COLORS } from '@/app/COLORS'
 import { Poppins_700Bold } from '@expo-google-fonts/poppins'
 import { useFonts } from 'expo-font'
 import { Dropdown } from 'react-native-element-dropdown'
@@ -27,12 +27,6 @@ export default function Home() {
 
   return (
     <View style={styles.homeContainer}>
-      <View style={styles.headerContainer}>
-        <ImageBackground source={menuIcon} height={40} width={40}>
-          <Pressable style={styles.menuButton} />
-        </ImageBackground>
-        <Image source={userIcon} style={styles.userIcon} />
-      </View>
       <View style={styles.walletBalanceContainer}>
         <Text style={styles.balanceTextDescription}>Total Balance</Text>
         <Text style={styles.balanceText}>$2,000</Text>
