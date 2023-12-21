@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '@/app/COLORS'
+import { COLORS } from 'app/COLORS'
 import { useFonts } from '@expo-google-fonts/poppins/useFonts'
 import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins'
 
-const CreateNewWallet = () => {
+const ImportExistingWallet = () => {
     const [fontsLoaded] = useFonts({
         Poppins_600SemiBold,
         Poppins_700Bold
@@ -14,22 +14,27 @@ const CreateNewWallet = () => {
         <View style={styles.createWalletContainer}>
             <View style={styles.walletTextContainer}>
                 <Text style={styles.walletContainerHeading}>
-                    Create New Wallet
+                    Import
+                    Existing Wallet
                 </Text>
                 <Text style={styles.walletText}>
-                    Create a new  Bitgesell Wallet to  manage all your
-                    BGL and other assets
+                    Seamlessly transition to Bitgesell Wallet by pasting your mnemonic phrase – effortlessly import your existing wallet and dive into decentralized convenience.
                 </Text>
             </View>
             <View style={styles.createWalletForm}>
                 <Text style={styles.inputLabel}>
-                    Enter Password
+                    Seedphrase/Mnemonic
                 </Text>
-                <TextInput style={styles.passwordInput} textContentType='password' />
+                <TextInput style={styles.passwordInput} placeholder='Paste wallet seed phrase' placeholderTextColor={COLORS.WHITE003} />
+                <Text style={styles.inputLabel}>
+                    Password
+                </Text>
+                <TextInput style={styles.passwordInput} placeholder='Password' placeholderTextColor={COLORS.WHITE003} />
+
                 <Text style={styles.walletText}>
                     🔒 Keep this password safe as it will be used to keep your wallet safe on this device.
                 </Text>
-                <View style={styles.submitButtonContainer}>
+                <View>
                     <Pressable style={styles.submitButton} onPress={() => alert('Im in!')}>
                         <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
                     </Pressable>
@@ -39,7 +44,7 @@ const CreateNewWallet = () => {
     )
 }
 
-export default CreateNewWallet
+export default ImportExistingWallet
 
 const styles = StyleSheet.create({
     createWalletContainer: {
@@ -108,7 +113,7 @@ const styles = StyleSheet.create({
         color: COLORS.WHITE,
         fontSize: 16
     },
-    submitButtonContainer: {
-        marginTop: 158
-    }
+    // submitButtonContainer: {
+    //     marginTop: 158
+    // }
 })

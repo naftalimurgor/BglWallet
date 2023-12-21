@@ -1,9 +1,11 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLORS } from '@/app/COLORS'
+import { COLORS } from 'app/COLORS'
 import SplashLogo from '@/components/SplashLogo'
 import { useFonts } from 'expo-font'
 import { Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { StatusBar } from 'expo-status-bar'
+import SkipButton from '@/components/SkipButton'
 
 export default function WelcomeWalkThrough() {
     // Loads non-system font asynchronously, set as fontFamily: 'Poppins_500Medium'
@@ -14,6 +16,7 @@ export default function WelcomeWalkThrough() {
 
     return (
         <View style={styles.welcomeContainer}>
+            <StatusBar hidden={true}/>
             <View style={styles.viewLogoContainer}>
                 <SplashLogo />
             </View>
@@ -26,6 +29,7 @@ export default function WelcomeWalkThrough() {
                     –Start managing your digital assets with ease and confidence.
                 </Text>
             </View>
+            <SkipButton route='/onboarding-step-one'/>
         </View>
     )
 }

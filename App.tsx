@@ -1,24 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import WelcomeSplash from '@/app/screens/WelcomeSplash';
-import WelcomeWalkThrough from '@/app/screens/WelcomeWalkThrough';
-import OnboardingStepOne from '@/app/screens/OnboardingStepOne';
-import OnboardingStepTwo from '@/app/screens/OnboardingStepTwo';
-import OnboardingStepThree from '@/app/screens/OnboardScreenThree';
-import CreateNewWallet from '@/app/screens/CreateNewWallet';
-import ImportExistingWallet from '@/app/screens/ImportExistingWallet';
-import Home from '@/app/screens/Home';
-
+import WelcomeSplash from '@/app/WelcomeSplash';
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback, useEffect, useState } from 'react';
+import { View } from 'react-native';
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false)
+
+  useEffect(() => {
+    async function initApp() {
+      try {
+        new Promise(resolve => setTimeout(resolve, 2000))
+      } catch (error) {
+        console.warn(error)
+      } finally {
+        setAppIsReady(true)
+      }
+    }
+
+    initApp()
+  }, [])
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync()
+    }
+
+  }, [appIsReady])
+
+  if (!appIsReady) return null
+
+
   return (
-    // <WelcomeSplash/>
-    // <WelcomeWalkThrough/>
-    // <OnboardingStepOne/>
-    // <OnboardingStepTwo/>
-    // <OnboardingStepThree/>
-    // <CreateNewWallet/>
-    // <ImportExistingWallet/>
-    <Home/>
-  );
+      <WelcomeSplash onLayout={onLayoutRootView}/>
+  )
+  // <WelcomeWalkThrough/>
+  // <OnboardingStepTwo/>
+  // <OnboardingStepThree/>
+  // <CreateNewWallet/>
+  // <ImportExistingWallet/>
+  // <Home/>
+  // );
+
 }

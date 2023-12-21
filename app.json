@@ -1,15 +1,14 @@
 {
   "expo": {
-    "name": "Bglwallet",
-    "slug": "Bglwallet",
+    "name": "Bitgesell Wallet",
+    "slug": " bitgesell-wallet",
+    "scheme": "bitgesell-wallet",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/splash.svg",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#824FF4"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,15 +18,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/splash.png",
+        "backgroundColor": "#824FF4"
       }
     },
     "web": {
-      "favicon": "./src/assets/favicon.png"
+      "favicon": "./assets/favicon.png"
     },
     "experiments": {
       "tsconfigPaths": true
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  },
+  "web": {
+    "bundler": "metro"
   }
 }
