@@ -9,7 +9,6 @@ import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
 
 const OnboardingStepOne = () => {
-  // Loads non-system font asynchronously, set as fontFamily: 'Poppins_500Medium'
   const [fontsLoaded] = useFonts({
     Poppins_700Bold,
     Poppins_300Light,

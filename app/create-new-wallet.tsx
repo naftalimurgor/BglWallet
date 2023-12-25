@@ -30,16 +30,16 @@ const CreateNewWallet = () => {
         </Text>
       </View>
       <View style={styles.createWalletForm}>
-      <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
+        <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
           Enter Email
         </Text>
         <TextInput
-            style={styles.passwordInput}
-         autoCorrect={false}
-            onChangeText={(text) => {
-              setPassword(text)
-            }}
-          />
+          style={styles.passwordInput}
+          autoCorrect={false}
+          onChangeText={(text) => {
+            setPassword(text)
+          }}
+        />
 
         <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
           Enter Password
@@ -56,7 +56,7 @@ const CreateNewWallet = () => {
             }}
           />
           <Feather
-            name={secure ? "eye": "eye-off"}
+            name={secure ? "eye" : "eye-off"}
             size={24}
             onPress={() => {
               setSecure((secure) => !secure)
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  
+
   inputLabel: {
     color: COLORS.BLACK,
     fontSize: 14,
