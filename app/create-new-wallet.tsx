@@ -6,6 +6,7 @@ import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins
 import { Feather } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
+import { emailRegex } from '@/api/User'
 
 const CreateNewWallet = () => {
   const [fontsLoaded] = useFonts({
@@ -13,10 +14,15 @@ const CreateNewWallet = () => {
     Poppins_700Bold
   })
 
-  const [password, setPassword] = useState<string>()
-  const [email, setEmail] = useState<string>()
+  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+
+  const handleSubmit = async () => {
+
+  }
 
   const [secure, setSecure] = useState<boolean>(true)
+  
   return (
     <View style={styles.createWalletContainer}>
       <StatusBar hidden={true} />
@@ -37,8 +43,9 @@ const CreateNewWallet = () => {
           style={styles.passwordInput}
           autoCorrect={false}
           onChangeText={(text) => {
-            setPassword(text)
+            setEmail(text)
           }}
+          autoComplete='email'
         />
 
         <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
@@ -70,7 +77,9 @@ const CreateNewWallet = () => {
           🔒 Keep this password safe as it will be used to keep your wallet safe on this device.
         </Text>
         <View style={styles.submitButtonContainer}>
-          <Pressable style={styles.submitButton} onPress={() => {
+          <Pressable style={[styles.submitButton, {opacity: password !=='' && emailRegex(email) ? 1: 0.5}]} 
+          disabled={password === '' && !emailRegex(email)}
+          onPress={() => {
             router.push('/(home)/')
           }}>
             <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
@@ -124,8 +133,6 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK,
     fontSize: 14,
     fontWeight: '700',
-    fontFamily: 'Poppins_700Bold'
-
   },
   passwordInput: {
     width: 335,
@@ -154,7 +161,8 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: COLORS.WHITE,
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: '600'
   },
   submitButtonContainer: {
     // marginTop: 158

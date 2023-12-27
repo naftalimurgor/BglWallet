@@ -1,7 +1,7 @@
 
 import AvatarIcon from '@/components/Menu'
 import React from 'react'
-import { View, Text, StyleSheet, StatusBar, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { COLORS } from '../COLORS'
 import BitgesellLogoBlack from '@/components/BitgesellIconBlack'
@@ -10,10 +10,12 @@ import ReceiveIcon from '@/components/ReceiveIcon'
 import ReceiveBGL from '@/components/ReceiveBGL'
 import SwitchNetworks from '@/components/SwitchNetworks'
 import { router } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
 
-const wallet = () => {
+const Home = () => {
   return (
     <ScrollView style={styles.walletContainer}>
+      <StatusBar backgroundColor='#824FF4' />
       <View style={styles.balanceContainer}>
         <View style={styles.headerContainer}>
           <Text style={{ color: COLORS.WHITE }}>
@@ -55,42 +57,44 @@ const wallet = () => {
           </View>
         </View>
       </View>
-      <View style={styles.homeNavContainer}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 37 }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-            <Pressable style={styles.navButton}
-              onPress={() => {
-                router.push('/send')
-              }}
-            >
-              <MobileIcon />
-            </Pressable>
-            <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
-              SEND BGL
-            </Text>
-          </View>
+      <View style={{paddingEnd: 20, paddingStart: 20}}>
+        <View style={styles.homeNavContainer}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 37 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+              <Pressable style={styles.navButton}
+                onPress={() => {
+                  router.push('/send')
+                }}
+              >
+                <MobileIcon />
+              </Pressable>
+              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
+                SEND BGL
+              </Text>
+            </View>
 
-          <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-            <Pressable
-              style={styles.navButton}
-              onPress={() => {
-                router.push('/receive-bgl')
-              }}
-            >
-              <ReceiveBGL />
-            </Pressable>
-            <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
-              RECEIVE BGL
-            </Text>
-          </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+              <Pressable
+                style={styles.navButton}
+                onPress={() => {
+                  router.push('/receive-bgl')
+                }}
+              >
+                <ReceiveBGL />
+              </Pressable>
+              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
+                RECEIVE BGL
+              </Text>
+            </View>
 
-          <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-            <Pressable style={styles.navButton}>
-              <SwitchNetworks />
-            </Pressable>
-            <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
-              SWITCH ACCOUNTS
-            </Text>
+            <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+              <Pressable style={styles.navButton}>
+                <SwitchNetworks />
+              </Pressable>
+              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
+                SWITCH ACCOUNTS
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -139,7 +143,7 @@ const wallet = () => {
   )
 }
 
-export default wallet
+export default Home
 
 const styles = StyleSheet.create({
   walletContainer: {
@@ -165,8 +169,6 @@ const styles = StyleSheet.create({
     minHeight: 232,
     minWidth: 335,
     marginTop: -130,
-    marginLeft: 20,
-    marginRight: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

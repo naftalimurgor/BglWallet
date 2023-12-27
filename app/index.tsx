@@ -28,7 +28,7 @@ export default function WelcomeSplash({ onLayout }: Props) {
           Welcome to our new crypto wallet mobile app
         </Text>
       </View>
-      <SkipButton route='/welcome-walk-through' />
+      <SkipButton route='/onboarding-step-one' />
     </View>
   )
 }

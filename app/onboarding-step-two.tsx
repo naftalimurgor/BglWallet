@@ -21,7 +21,9 @@ const OnboardingStepTwo = () => {
     <View style={styles.onboardingContainer}>
       <StatusBar hidden={true} />
       <View style={styles.skipContainer}>
-        <Pressable onPress={() => alert('skip!')}>
+        <Pressable onPress={() => {
+          router.replace('/create-new-wallet')
+        }}>
           <Text style={[styles.skippButtonText, { fontFamily: '' }]}>Skip</Text>
         </Pressable>
       </View>
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   isometricContainer: {
-    marginTop: 80,
+    marginTop: 10,
     marginRight: 8,
     marginLeft: 8,
     justifyContent: 'center',

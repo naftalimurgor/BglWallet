@@ -2,7 +2,6 @@ import { Drawer } from 'expo-router/drawer';
 import { StyleSheet, View } from 'react-native';
 import { COLORS } from '../COLORS';
 
-
 export default function Layout() {
   return (
     <Drawer>
@@ -32,11 +31,7 @@ export default function Layout() {
         options={{
           headerTitleAlign: 'center',
           drawerLabel: 'My Wallet',
-          title: '',
-          headerStyle: {
-            backgroundColor: '#9A6DFF',
-          },
-          headerTintColor: COLORS.WHITE
+          title: 'My Wallet',
           // header: (props) => <CustomDrawerHeader props={props}/>
         }}
       />
@@ -48,12 +43,20 @@ export default function Layout() {
           title: 'Receive BGL',
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="backup-wallet"
         options={{
           headerTitleAlign: 'center',
           drawerLabel: 'Backup Wallet',
           title: 'Backup Wallet',
+        }}
+      />
+      <Drawer.Screen
+        name="settings"
+        options={{
+          headerTitleAlign: 'center',
+          drawerLabel: 'Settings',
+          title: 'Settings',
         }}
       />
     </Drawer>
