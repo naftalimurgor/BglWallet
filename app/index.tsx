@@ -18,7 +18,7 @@ export default function WelcomeSplash({ onLayout }: Props) {
 
   return (
     <View style={styles.welcomeContainer} onLayout={onLayout}>
-      <StatusBar hidden={true} />
+      <StatusBar backgroundColor='#824FF4' />
 
       <View style={styles.viewLogoContainer}>
         <SplashLogo />

@@ -16,7 +16,6 @@ export default function WelcomeWalkThrough() {
 
     return (
         <View style={styles.welcomeContainer}>
-            <StatusBar hidden={true}/>
             <View style={styles.viewLogoContainer}>
                 <SplashLogo />
             </View>

@@ -17,10 +17,10 @@ const OpenWallet = () => {
   const [email, setEmail] = useState<string>()
 
   const [secure, setSecure] = useState<boolean>(true)
-  
+
   return (
     <View style={styles.createWalletContainer}>
-      <StatusBar hidden={true} />
+      <StatusBar backgroundColor='#824FF4' />
       <View style={styles.walletTextContainer}>
         <Text style={[styles.walletContainerHeading, { fontFamily: fontsLoaded ? 'Poppins_600SemiBold' : '' }]}>
           Create New Wallet

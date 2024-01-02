@@ -19,7 +19,7 @@ const OnboardingStepOne = () => {
 
   return (
     <View style={styles.onboardingContainer}>
-      <StatusBar translucent hidden backgroundColor='transparent' />
+      <StatusBar backgroundColor='#824FF4' />
       <View style={styles.skipContainer}>
         <Pressable onPress={() => {
           router.replace('/create-new-wallet')
