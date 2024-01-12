@@ -9,7 +9,7 @@ const SkipButton = ({ route }: Props) => {
   return (
     <View style={styles.skipContainer}>
       <Pressable
-      style={{}}
+      style={styles.skiptButton}
       onPress={() => {
         router.replace(route)
       }}>
