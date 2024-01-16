@@ -15,7 +15,7 @@ import { StatusBar } from 'expo-status-bar'
 const Home = () => {
   return (
     <ScrollView style={styles.walletContainer}>
-      <StatusBar backgroundColor='#824FF4' />
+      {/* <StatusBar backgroundColor='#824FF4' /> */}
       <View style={styles.balanceContainer}>
         <View style={styles.headerContainer}>
           <Text style={{ color: COLORS.WHITE }}>

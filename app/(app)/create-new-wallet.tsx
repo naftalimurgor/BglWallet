@@ -6,18 +6,23 @@ import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins
 import { Feather } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
+import { emailRegex } from '@/api/User'
 
-const OpenWallet = () => {
+const CreateNewWallet = () => {
   const [fontsLoaded] = useFonts({
     Poppins_600SemiBold,
     Poppins_700Bold
   })
 
-  const [password, setPassword] = useState<string>()
-  const [email, setEmail] = useState<string>()
+  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+
+  const handleSubmit = async () => {
+
+  }
 
   const [secure, setSecure] = useState<boolean>(true)
-
+  
   return (
     <View style={styles.createWalletContainer}>
       <StatusBar backgroundColor='#824FF4' />
@@ -30,7 +35,19 @@ const OpenWallet = () => {
           BGL and other assets
         </Text>
       </View>
-      <View style={styles.openWalletForm}>
+      <View style={styles.createWalletForm}>
+        <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
+          Enter Email
+        </Text>
+        <TextInput
+          style={styles.passwordInput}
+          autoCorrect={false}
+          onChangeText={(text) => {
+            setEmail(text)
+          }}
+          autoComplete='email'
+        />
+
         <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
           Enter Password
         </Text>
@@ -60,10 +77,12 @@ const OpenWallet = () => {
           🔒 Keep this password safe as it will be used to keep your wallet safe on this device.
         </Text>
         <View style={styles.submitButtonContainer}>
-          <Pressable style={styles.submitButton} onPress={() => {
+          <Pressable style={[styles.submitButton, {opacity: password !=='' && emailRegex(email) ? 1: 0.5}]} 
+          disabled={password === '' && !emailRegex(email)}
+          onPress={() => {
             router.push('/(home)/')
           }}>
-            <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
+            <Text style={styles.submitButtonText}>Create A New Wallet</Text>
           </Pressable>
         </View>
       </View>
@@ -71,7 +90,7 @@ const OpenWallet = () => {
   )
 }
 
-export default OpenWallet
+export default CreateNewWallet
 
 const styles = StyleSheet.create({
   createWalletContainer: {
@@ -97,7 +116,7 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
 
-  openWalletForm: {
+  createWalletForm: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start'
@@ -114,8 +133,6 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK,
     fontSize: 14,
     fontWeight: '700',
-    fontFamily: 'Poppins_700Bold'
-
   },
   passwordInput: {
     width: 335,
@@ -144,7 +161,8 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: COLORS.WHITE,
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: '600'
   },
   submitButtonContainer: {
     // marginTop: 158

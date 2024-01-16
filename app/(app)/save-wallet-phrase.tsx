@@ -8,21 +8,16 @@ import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
 import { emailRegex } from '@/api/User'
 
-const CreateNewWallet = () => {
+const SaveSeedPhrase = () => {
   const [fontsLoaded] = useFonts({
     Poppins_600SemiBold,
     Poppins_700Bold
   })
 
   const [password, setPassword] = useState<string>('')
+
   const [email, setEmail] = useState<string>('')
 
-  const handleSubmit = async () => {
-
-  }
-
-  const [secure, setSecure] = useState<boolean>(true)
-  
   return (
     <View style={styles.createWalletContainer}>
       <StatusBar backgroundColor='#824FF4' />
@@ -40,6 +35,7 @@ const CreateNewWallet = () => {
           Enter Email
         </Text>
         <TextInput
+          editable={false}
           style={styles.passwordInput}
           autoCorrect={false}
           onChangeText={(text) => {
@@ -48,40 +44,17 @@ const CreateNewWallet = () => {
           autoComplete='email'
         />
 
-        <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
-          Enter Password
-        </Text>
-
-        <View style={styles.passwordInputContainer}>
-          <TextInput
-            style={styles.passwordInput}
-            textContentType='password'
-            secureTextEntry={secure}
-            autoCorrect={false}
-            onChangeText={(text) => {
-              setPassword(text)
-            }}
-          />
-          <Feather
-            name={secure ? "eye" : "eye-off"}
-            size={24}
-            onPress={() => {
-              setSecure((secure) => !secure)
-            }}
-            color="black"
-            style={{ marginLeft: -32, marginBottom: 40, }}
-          />
-
-        </View>
         <Text style={styles.walletText}>
-          🔒 Keep this password safe as it will be used to keep your wallet safe on this device.
+          🔒 Important: Backup Your Seed Phrase!
+          Secure your account:
+          Write down and store your seed phrase in a safe place. It's your key to account recovery.
         </Text>
         <View style={styles.submitButtonContainer}>
-          <Pressable style={[styles.submitButton, {opacity: password !=='' && emailRegex(email) ? 1: 0.5}]} 
-          disabled={password === '' && !emailRegex(email)}
-          onPress={() => {
-            router.push('/(home)/')
-          }}>
+          <Pressable style={[styles.submitButton, { opacity: password !== '' && emailRegex(email) ? 1 : 0.5 }]}
+            disabled={password === '' && !emailRegex(email)}
+            onPress={() => {
+              router.push('/(home)/')
+            }}>
             <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
           </Pressable>
         </View>
@@ -90,7 +63,7 @@ const CreateNewWallet = () => {
   )
 }
 
-export default CreateNewWallet
+export default SaveSeedPhrase
 
 const styles = StyleSheet.create({
   createWalletContainer: {

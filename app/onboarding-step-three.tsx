@@ -23,7 +23,7 @@ const OnboardingStepOne = () => {
         <Pressable onPress={() => {
           router.replace('/create-new-wallet')
         }}>
-          <Text style={[styles.skippButtonText, { fontFamily: '' }]}>Skip</Text>
+          <Text style={[styles.skippButtonText, { fontFamily: 'Poppins_300Light' }]}>Skip</Text>
         </Pressable>
       </View>
 
@@ -34,11 +34,11 @@ const OnboardingStepOne = () => {
       </View>
 
       <View style={styles.onboardTextContainer}>
-        <Text style={[styles.onboardHeading, { fontFamily: '' }]}>
+        <Text style={[styles.onboardHeading, { fontFamily: 'Poppins_700Bold' }]}>
           Keep your wallet
           app up to date
         </Text>
-        <Text style={[styles.onboardingText, { fontFamily: '' }]}>
+        <Text style={[styles.onboardingText, { fontFamily: 'Poppins_400Regular' }]}>
           Regularly update your wallet software to ensure you have the latest security patches and bug fixes.
         </Text>
       </View>
@@ -49,9 +49,9 @@ const OnboardingStepOne = () => {
         </View>
         <View>
           <Pressable style={styles.onboardButton} onPress={() => {
-            router.replace('/create-new-wallet')
+            router.replace('/(app)/create-new-wallet')
           }}>
-            <Text style={[styles.onboardButtonText, { fontFamily: '' }]}>Continue</Text>
+            <Text style={[styles.onboardButtonText, { fontFamily: 'Poppins_500Medium' }]}>Continue</Text>
           </Pressable>
         </View>
       </View>

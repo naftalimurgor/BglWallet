@@ -24,7 +24,7 @@ const OnboardingStepTwo = () => {
         <Pressable onPress={() => {
           router.replace('/create-new-wallet')
         }}>
-          <Text style={[styles.skippButtonText, { fontFamily: '' }]}>Skip</Text>
+          <Text style={[styles.skippButtonText, { fontFamily: 'Poppins_300Light' }]}>Skip</Text>
         </Pressable>
       </View>
 
@@ -35,12 +35,13 @@ const OnboardingStepTwo = () => {
       </View>
 
       <View style={styles.onboardTextContainer}>
-        <Text style={[styles.onboardHeading, { fontFamily: '' }]}>
+        <Text style={[styles.onboardHeading, { fontFamily: 'Poppins_700Bold' }]}>
           Manage all your
           assets in one place
         </Text>
-        <Text style={[styles.onboardingText, { fontFamily: '' }]}>
-          Unlock the power of our crypto wallet app! Seamlessly manage all your assets in one secure place.                </Text>
+        <Text style={[styles.onboardingText, { fontFamily: 'Poppins_400Regular' }]}>
+          Unlock the power of our crypto wallet app! Seamlessly manage all your assets in one secure place.
+        </Text>
       </View>
 
       <View style={styles.footerContainer}>

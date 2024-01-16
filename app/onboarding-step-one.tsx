@@ -24,7 +24,7 @@ const OnboardingStepOne = () => {
         <Pressable onPress={() => {
           router.replace('/create-new-wallet')
         }}>
-          <Text style={[styles.skippButtonText, { fontFamily: '' }]}>Skip</Text>
+          <Text style={[styles.skippButtonText, { fontFamily: fontsLoaded ? 'Poppins_300Light' : '' }]}>Skip</Text>
         </Pressable>
       </View>
 
@@ -35,11 +35,11 @@ const OnboardingStepOne = () => {
       </View>
 
       <View style={styles.onboardTextContainer}>
-        <Text style={styles.onboardHeading}>
+        <Text style={[styles.onboardHeading, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
           Research and select
           a wallet
         </Text>
-        <Text style={[styles.onboardingText, { fontFamily: '' }]}>
+        <Text style={[styles.onboardingText, { fontFamily: fontsLoaded ? 'Poppins_400Regular': '' }]}>
           Start by researching different cryptocurrency wallets available in the market. Consider factors such as security.
         </Text>
       </View>
@@ -52,7 +52,7 @@ const OnboardingStepOne = () => {
           <Pressable style={styles.onboardButton} onPress={() => {
             router.replace('/onboarding-step-two')
           }}>
-            <Text style={[styles.onboardButtonText, { fontFamily: '' }]}>Continue</Text>
+            <Text style={[styles.onboardButtonText, { fontFamily: fontsLoaded ? 'Poppins_500Medium' : '' }]}>Continue</Text>
           </Pressable>
         </View>
       </View>
