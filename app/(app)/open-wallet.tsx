@@ -62,7 +62,7 @@ const OpenWallet = () => {
           <Pressable style={styles.submitButton} onPress={() => {
             router.push('/(home)/')
           }}>
-            <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
+            <Text style={styles.submitButtonText}>Open Wallet</Text>
           </Pressable>
         </View>
       </View>
