@@ -1,11 +1,12 @@
+import { store } from '@/features/store';
 import { Slot } from 'expo-router';
-import { SessionProvider } from '../Context';
+import { Provider } from 'react-redux';
 
 export default function Root() {
   // Set up the auth context and render our layout inside of it.
   return (
-    <SessionProvider>
+    <Provider store={store}>
       <Slot />
-    </SessionProvider>
+    </Provider>
   );
 }

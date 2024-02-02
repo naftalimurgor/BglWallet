@@ -9,10 +9,11 @@ import MobileIcon from '@/components/Mobile'
 import ReceiveIcon from '@/components/ReceiveIcon'
 import ReceiveBGL from '@/components/ReceiveBGL'
 import SwitchNetworks from '@/components/SwitchNetworks'
-import { router } from 'expo-router'
+import { Redirect, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 const Home = () => {
+
   return (
     <ScrollView style={styles.walletContainer}>
       {/* <StatusBar backgroundColor='#824FF4' /> */}
@@ -57,7 +58,7 @@ const Home = () => {
           </View>
         </View>
       </View>
-      <View style={{paddingEnd: 20, paddingStart: 20}}>
+      <View style={{ paddingEnd: 20, paddingStart: 20 }}>
         <View style={styles.homeNavContainer}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 37 }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', }}>

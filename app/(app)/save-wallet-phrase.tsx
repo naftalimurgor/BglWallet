@@ -6,7 +6,7 @@ import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins
 import { Feather } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
-import { emailRegex } from '@/api/User'
+import { emailRegex } from '@/features/api/User'
 
 const SaveSeedPhrase = () => {
   const [fontsLoaded] = useFonts({
