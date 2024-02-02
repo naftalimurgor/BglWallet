@@ -21,7 +21,8 @@ const OnboardingStepOne = () => {
       <StatusBar backgroundColor='#824FF4' />
       <View style={styles.skipContainer}>
         <Pressable onPress={() => {
-          router.replace('/create-new-wallet')
+          router.replace('/(app)/create-new-wallet')
+          alert('hello')
         }}>
           <Text style={[styles.skippButtonText, { fontFamily: 'Poppins_300Light' }]}>Skip</Text>
         </Pressable>
