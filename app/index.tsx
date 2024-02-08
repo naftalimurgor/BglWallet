@@ -3,8 +3,9 @@ import SplashLogo from '@/components/SplashLogo'
 import { Poppins_500Medium } from '@expo-google-fonts/poppins'
 import { COLORS } from 'app/COLORS'
 import { useFonts } from 'expo-font'
+import { router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { LayoutChangeEvent, StyleSheet, Text, View } from 'react-native'
 
 interface Props {
@@ -16,22 +17,29 @@ export default function WelcomeSplash({ onLayout }: Props) {
     Poppins_500Medium
   })
 
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      router.push('/onboard-slider')
+    }, 5000);
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [])
+
+
   return (
     <View style={styles.welcomeContainer} onLayout={onLayout}>
       <StatusBar backgroundColor='#824FF4' />
-
       <View style={styles.viewLogoContainer}>
         <SplashLogo />
       </View>
-      <View style={[styles.textContainer,]}>
-        <Text style={[styles.welcomeText, { fontFamily: fontsLoaded ? 'Poppins_500Medium' : '' }]}>
-          Welcome to our new crypto wallet mobile app
-        </Text>
-      </View>
-      <SkipButton route='/onboarding-step-one' />
     </View>
   )
 }
+
+// @TODO: use an animated carousel for the walk through pages as opposed to routing
+// Autoslide and physically slide
 
 const styles = StyleSheet.create({
   welcomeContainer: {
