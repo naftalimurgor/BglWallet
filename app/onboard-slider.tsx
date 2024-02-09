@@ -26,7 +26,7 @@ type SlideItem = {
 const slides = [
   {
     key: 'one',
-    title: 'Research and selecta wallet',
+    title: 'Research and select a wallet',
     text: 'Start by researching different cryptocurrency wallets available in the market. Consider factors such as security.',
     image: require('@/assets/step1.png'),
     backgroundColor: '#fff',
