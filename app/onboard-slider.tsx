@@ -80,6 +80,7 @@ const OnboardSlider = () => {
     router.replace('/(app)/create-new-wallet')
   }
 
+  // @todo: render as pagination in order to customize the slider dots position to 'absolute'
   const renderSlides = ({ item }: SlideItem) => {
     return (
       <View>
