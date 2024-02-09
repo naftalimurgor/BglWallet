@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   walletTextContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    marginTop: 144
+    marginTop: 70
   },
   walletContainerHeading: {
     color: COLORS.BLACK_ACCENT,
