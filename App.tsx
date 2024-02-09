@@ -10,7 +10,7 @@ export default function App() {
   useEffect(() => {
     async function initApp() {
       try {
-        new Promise(resolve => setTimeout(resolve, 2000))
+        new Promise(resolve => setTimeout(resolve, 1000))
       } catch (error) {
         console.warn(error)
       } finally {
@@ -32,7 +32,7 @@ export default function App() {
 
 
   return (
-      <WelcomeSplash onLayout={onLayoutRootView}/>
+    <WelcomeSplash onLayout={onLayoutRootView} />
   )
   // <WelcomeWalkThrough/>
   // <OnboardingStepTwo/>

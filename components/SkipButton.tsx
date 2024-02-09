@@ -8,7 +8,9 @@ interface Props {
 const SkipButton = ({ route }: Props) => {
   return (
     <View style={styles.skipContainer}>
-      <Pressable onPress={() => {
+      <Pressable
+      style={styles.skiptButton}
+      onPress={() => {
         router.replace(route)
       }}>
         <Text style={styles.skipText}>Skip</Text>
@@ -23,9 +25,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginRight: 67,
-    marginBottom: 82
+    marginBottom: 82,
+  },
+  skiptButton: {
+    height: 80,
+    width: 80
   },
   skipText: {
+    fontWeight: '600',
     color: COLORS.WHITE
   }
 })

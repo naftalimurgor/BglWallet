@@ -16,7 +16,6 @@ export default function WelcomeWalkThrough() {
 
     return (
         <View style={styles.welcomeContainer}>
-            <StatusBar hidden={true}/>
             <View style={styles.viewLogoContainer}>
                 <SplashLogo />
             </View>
@@ -40,17 +39,14 @@ const styles = StyleSheet.create({
         flex: 1
     },
     viewLogoContainer: {
-        flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '40%'
     },
     textContainer: {
-        flex: 0.6,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: '50%'
     },
     ctaHeadingText: {
         fontSize: 24,

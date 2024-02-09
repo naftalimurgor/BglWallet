@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Bitgesell Wallet",
-    "slug": " bitgesell-wallet",
+    "slug": "bitgesell-wallet",
     "scheme": "bitgesell-wallet",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,6 +9,10 @@
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#824FF4"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#824FF4",
+      "translucent": false
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#824FF4"
-      }
+      },
+      "package": "com.naftalimurgor.bitgesellwallet"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,7 +35,16 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e47f78c1-540b-40ba-925e-7ccabe299d23"
+      }
+    },
+    "owner": "nmurgor"
   },
   "web": {
     "bundler": "metro"
