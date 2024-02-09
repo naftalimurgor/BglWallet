@@ -1,8 +1,7 @@
 
 import AvatarIcon from '@/components/Menu'
 import React from 'react'
-import { View, Text, StyleSheet, Pressable } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { COLORS } from '../COLORS'
 import BitgesellLogoBlack from '@/components/BitgesellIconBlack'
 import MobileIcon from '@/components/Mobile'
@@ -13,7 +12,10 @@ import { Redirect, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 const Home = () => {
-
+  // first page(dashboard for the application)
+  // revisit and perfect this as would be the selling point for the app
+  // try as much as possible to make it look like KCB app dashboard page with sliding carousel
+  // in creativity, sky is the limit
   return (
     <ScrollView style={styles.walletContainer}>
       {/* <StatusBar backgroundColor='#824FF4' /> */}
@@ -135,7 +137,6 @@ const Home = () => {
               </Text>
             </View>
             <View>
-
             </View>
           </View>
         </View>

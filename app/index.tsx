@@ -19,6 +19,10 @@ export default function WelcomeSplash({ onLayout }: Props) {
 
   useEffect(() => {
     const timerId = setTimeout(() => {
+      // only display splash on initial application launch else go straight to:
+      // 1. open wallet: for an expired session
+      // 2. or go home(valid sessions only)
+      // hence add a check(store/persistence for token validity and app data?)
       router.push('/onboard-slider')
     }, 5000);
 
