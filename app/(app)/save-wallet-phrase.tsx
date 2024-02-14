@@ -1,12 +1,21 @@
+// @ts-nocheck
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { COLORS } from 'app/COLORS'
 import { useFonts } from '@expo-google-fonts/poppins/useFonts'
-import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import {
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  Poppins_400Regular
+} from '@expo-google-fonts/poppins'
 import { Feather } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
-import { emailRegex } from '@/features/api/User'
+import { useDispatch, useSelector } from 'react-redux'
+import { API_URL } from '@/features/api/User'
+import { createWallet } from '@/features/wallet/walletSlice'
+import Toast from 'react-native-toast-message'
+import { createNewWallet } from '../utils'
 
 const SaveSeedPhrase = () => {
   const [fontsLoaded] = useFonts({
@@ -14,16 +23,32 @@ const SaveSeedPhrase = () => {
     Poppins_700Bold
   })
 
-  const [password, setPassword] = useState<string>('')
+  const [wallet, setWallet] = useState(null)
+  const dispatch = useDispatch()
 
-  const [email, setEmail] = useState<string>('')
+  useEffect(() => {
+    async function _createWallet() {
+      const wallet = await createNewWallet()
+      // @ts-ignore
+      dispatch(wallet)
+      // @ts-ignore
+      setWallet(wallet)
+    }
+  
+  }, )
+  
+  // @ts-ignore
+  const walletOj = useSelector(state => state.wallet.walletObj)
+  console.log('state auth object:', wallet)
+
 
   return (
     <View style={styles.createWalletContainer}>
-      <StatusBar backgroundColor='#824FF4' />
+      <StatusBar backgroundColor={COLORS.ACCENT} />
       <View style={styles.walletTextContainer}>
         <Text style={[styles.walletContainerHeading, { fontFamily: fontsLoaded ? 'Poppins_600SemiBold' : '' }]}>
-          Create New Wallet
+          Back up
+          Seed Phrase
         </Text>
         <Text style={styles.walletText}>
           Create a new  Bitgesell Wallet to  manage all your
@@ -31,34 +56,31 @@ const SaveSeedPhrase = () => {
         </Text>
       </View>
       <View style={styles.createWalletForm}>
-        <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_700Bold' : '' }]}>
-          Enter Email
+        <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_400Regular' : '' }]}>
+          Secret Phrase/Mneomic
         </Text>
         <TextInput
           editable={false}
+          value={wallet.seedphrase}
           style={styles.passwordInput}
           autoCorrect={false}
-          onChangeText={(text) => {
-            setEmail(text)
-          }}
-          autoComplete='email'
         />
 
-        <Text style={styles.walletText}>
+        <Text style={[styles.walletText, { fontFamily: fontsLoaded ? 'Poppins_400Regular' : '' }]}>
           🔒 Important: Backup Your Seed Phrase!
           Secure your account:
           Write down and store your seed phrase in a safe place. It's your key to account recovery.
         </Text>
         <View style={styles.submitButtonContainer}>
-          <Pressable style={[styles.submitButton, { opacity: password !== '' && emailRegex(email) ? 1 : 0.5 }]}
-            disabled={password === '' && !emailRegex(email)}
+          <Pressable style={[styles.submitButton]}
             onPress={() => {
               router.push('/(home)/')
             }}>
-            <Text style={styles.submitButtonText}>Create a A New Wallet</Text>
+            <Text style={styles.submitButtonText}>Save Seed Phrase</Text>
           </Pressable>
         </View>
       </View>
+      <Toast />
     </View>
   )
 }
@@ -74,7 +96,7 @@ const styles = StyleSheet.create({
   walletTextContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    marginTop: 144
+    marginTop: 70
   },
   walletContainerHeading: {
     color: COLORS.BLACK_ACCENT,
@@ -85,7 +107,7 @@ const styles = StyleSheet.create({
   },
   walletText: {
     color: COLORS.WHITE003,
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 24
   },
 
@@ -108,19 +130,19 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   passwordInput: {
-    width: 335,
+    width: 300,
     fontSize: 16,
     height: 81,
-    marginLeft: 12,
     // marginRight: 28,
-    borderBottomColor: COLORS.WHITE004,
+    borderColor: COLORS.WHITE004,
     borderStyle: 'solid',
     borderWidth: 2,
     borderTopColor: COLORS.WHITE,
     borderEndColor: COLORS.WHITE,
     borderLeftColor: COLORS.WHITE,
     borderRightColor: COLORS.WHITE,
-    marginBottom: 40
+    marginBottom: 40,
+    marginTop: 20
   },
 
   submitButton: {
@@ -134,7 +156,7 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     color: COLORS.WHITE,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600'
   },
   submitButtonContainer: {

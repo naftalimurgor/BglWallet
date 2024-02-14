@@ -13,7 +13,7 @@ const ImportExistingWallet = () => {
 
   return (
     <View style={styles.createWalletContainer}>
-      <StatusBar backgroundColor='#824FF4' />
+      <StatusBar backgroundColor={COLORS.ACCENT} />
       <View style={styles.walletTextContainer}>
         <Text style={styles.walletContainerHeading}>
           Import

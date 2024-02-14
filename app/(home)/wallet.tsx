@@ -107,7 +107,7 @@ export default Wallet
 
 const styles = StyleSheet.create({
   balanceContainer: {
-    backgroundColor: '#824FF4',
+    backgroundColor: COLORS.ACCENT,
     minHeight: 170,
     minWidth: 335,
     marginLeft: 20,

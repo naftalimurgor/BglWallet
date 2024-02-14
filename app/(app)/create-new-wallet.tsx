@@ -1,44 +1,124 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+} from 'react-native'
+
+import React, { useEffect, useState } from 'react'
 import { COLORS } from 'app/COLORS'
 import { useFonts } from '@expo-google-fonts/poppins/useFonts'
-import { Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import {
+  Poppins_600SemiBold,
+  Poppins_700Bold
+} from '@expo-google-fonts/poppins'
 import { Feather } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import { router } from 'expo-router'
-import { emailRegex } from '@/features/api/User'
-import { useStorageState } from '../hooks/useStorageState'
-import { useDispatch, useSelector } from 'react-redux'
 
+import { API_URL, emailRegex } from '@/features/api/User'
+import { useStorageState } from '@/app/hooks/useStorageState'
+import { useDispatch, useSelector } from 'react-redux'
+import { createAccount, createWallet } from '@/features/wallet/walletSlice'
+import Toast from 'react-native-toast-message'
+
+type User = {
+  token: string
+  auth: boolean
+  uid: string
+}
 
 const CreateNewWallet = () => {
+  const [item, setStorage] = useStorageState('user')
+  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [seedphrase, setSeedphrase] = useState<string | null>(null)
 
   // 1. dispatch(action(payload))
   const dispatch = useDispatch()
-  // 2. sample state access
-  // @ts-ignore 
-  const wallet = useSelector(state=> state.wallet)
 
   const [fontsLoaded] = useFonts({
     Poppins_600SemiBold,
     Poppins_700Bold
   })
 
-  const [session, setSession] = useStorageState('session')
-
-  const [password, setPassword] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-
-  const handleSubmit = async () => {
-    // use a thunk to perform create wallet with the appropriate error states
-    router.replace('/(home)/')
+  const displayToast = (message: string, type: string) => {
+    Toast.show({
+      text1: message,
+      type: type
+    })
   }
 
+  const handleSubmit = async () => {
+    setIsSubmitting(submitting => !submitting)
+    console.log('submitting..');
+
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/sign-up`, {
+        body: JSON.stringify({ password, email }),
+        method: 'POST',
+        headers
+      })
+      const authObj = await res.json()
+
+      if (authObj.uid && authObj.auth) {
+        const user = { ...authObj, email }
+        console.log(user)
+        setStorage(JSON.stringify(user))
+
+        dispatch(createAccount(user))
+        await initWallet(authObj.uid, email).then(() => {
+          // setStorage(authObj)
+          dispatch(createWallet({ wallets: [], seedphrase: 'place holder seedphrase!' }))
+          router.push('/save-wallet-phrase')
+        })
+      }
+      if (!authObj.auth) {
+        displayToast('Email address already in use, Use another email address', 'error')
+        setIsSubmitting(submitting => !submitting)
+
+      }
+
+    } catch (error) {
+      setIsSubmitting(submitting => !submitting)
+    }
+  }
+
+  async function initWallet(uid: string, email: string) {
+    const headers = {
+      'Content-Type': 'application/json'
+      // authorization headers here:
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/create-wallet`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ uid, email, token: null })
+      })
+      const wallet = await res.json()
+
+      if (wallet.success) {
+        setSeedphrase(wallet.seedphrase)
+        dispatch(createWallet(wallet))
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const [secure, setSecure] = useState<boolean>(true)
 
   return (
     <View style={styles.createWalletContainer}>
-      <StatusBar backgroundColor='#824FF4' />
+      <StatusBar backgroundColor={COLORS.ACCENT} />
       <View style={styles.walletTextContainer}>
         <Text style={[styles.walletContainerHeading, { fontFamily: fontsLoaded ? 'Poppins_600SemiBold' : '' }]}>
           Create New Wallet
@@ -92,11 +172,13 @@ const CreateNewWallet = () => {
         <View style={styles.submitButtonContainer}>
           <Pressable style={[styles.submitButton, { opacity: password !== '' && emailRegex(email) ? 1 : 0.5 }]}
             disabled={password === '' && !emailRegex(email)}
-            onPress={handleSubmit}>
+            onPress={async () => await handleSubmit()}>
+            {/* {isSubmitting ? (<Image source={require('@/assets/accountLoader.gif')} style={{height: 15}} />): (<Text style={styles.submitButtonText}>Create A New Wallet</Text>)  } */}
             <Text style={styles.submitButtonText}>Create A New Wallet</Text>
           </Pressable>
         </View>
       </View>
+      <Toast />
     </View>
   )
 }
@@ -108,7 +190,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.WHITE,
     padding: 20,
-    paddingLeft: 20,
   },
   walletTextContainer: {
     flexDirection: 'column',
@@ -124,7 +205,7 @@ const styles = StyleSheet.create({
   },
   walletText: {
     color: COLORS.WHITE003,
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 24
   },
 

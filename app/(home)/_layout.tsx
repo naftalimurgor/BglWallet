@@ -14,7 +14,7 @@ export default function Layout() {
           drawerLabel: 'Home',
           title: '',
           headerStyle: {
-            backgroundColor: '#A179FC',
+            backgroundColor: COLORS.ACCENT,
           },
           headerTintColor: COLORS.WHITE
           // header: (props) => <CustomDrawerHeader props={props}/>

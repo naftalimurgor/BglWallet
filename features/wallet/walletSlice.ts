@@ -4,28 +4,42 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   state: 'idle',
-  wallet: [],
-  credentials: {
+  walletObj: {
+    accounts: [],
+    seedphrase: "Place Holder seedphrase",
+  },
+  auth: {
     email: null,
-    password: null
+    token: null,
+    uid: null,
+    auth: false
   }
 }
 const walletSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
-    createWallet: (state, action) => {
-      // omit logic for api implementation
+    createAccount: (state, action) => {
+      state.auth = action.payload
     },
-    loadWallet: (state, acton) => {
+
+    createWallet: (state, action) => {
+      state.walletObj = action.payload
+    },
+
+    loadWallet: (state, action) => {
+
+    },
+    loadWalletDashboard: (state, action) => {
 
     }
+
   }
 
 })
 
 // thunks 
-const walletApi = createAsyncThunk('/wallet/api',async () => {
+const walletApi = createAsyncThunk('/wallet/api', async () => {
   return async function walletLoadThunk(email: string, password: string) {
     // code ommitted, reffer to the tutorial
   }
@@ -42,7 +56,7 @@ const walletApi = createAsyncThunk('/wallet/api',async () => {
 //   }
 // }
 // actions
-const {createWallet, loadWallet} = walletSlice.actions
+export const { createWallet, loadWallet, createAccount } = walletSlice.actions
 
 // reducer
 export default walletSlice.reducer

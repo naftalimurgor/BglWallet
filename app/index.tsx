@@ -24,6 +24,7 @@ export default function WelcomeSplash({ onLayout }: Props) {
       // 2. or go home(valid sessions only)
       // hence add a check(store/persistence for token validity and app data?)
       router.push('/onboard-slider')
+      
     }, 5000);
 
     return () => {
@@ -34,7 +35,7 @@ export default function WelcomeSplash({ onLayout }: Props) {
 
   return (
     <View style={styles.welcomeContainer} onLayout={onLayout}>
-      <StatusBar backgroundColor='#824FF4' />
+      <StatusBar backgroundColor={COLORS.ACCENT} />
       <View style={styles.viewLogoContainer}>
         <SplashLogo />
       </View>

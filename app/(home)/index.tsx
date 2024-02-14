@@ -10,15 +10,25 @@ import ReceiveBGL from '@/components/ReceiveBGL'
 import SwitchNetworks from '@/components/SwitchNetworks'
 import { Redirect, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { useStorageState } from '../hooks/useStorageState'
 
 const Home = () => {
   // first page(dashboard for the application)
   // revisit and perfect this as would be the selling point for the app
   // try as much as possible to make it look like KCB app dashboard page with sliding carousel
   // in creativity, sky is the limit
+  const [item, setStorage] = useStorageState('user')
+  React.useEffect(() => {
+    if (item) {
+      router.push('/(home)/')
+    } else {
+      router.replace('/open-wallet/')
+    }
+  }, [])
+
   return (
     <ScrollView style={styles.walletContainer}>
-      {/* <StatusBar backgroundColor='#824FF4' /> */}
+      {/* <StatusBar backgroundColor=COLORS.ACCENT /> */}
       <View style={styles.balanceContainer}>
         <View style={styles.headerContainer}>
           <Text style={{ color: COLORS.WHITE }}>
@@ -64,7 +74,7 @@ const Home = () => {
         <View style={styles.homeNavContainer}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 37 }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-              <Pressable style={styles.navButton}
+              <Pressable style={styles.navButtonOne}
                 onPress={() => {
                   router.push('/send')
                 }}
@@ -78,7 +88,7 @@ const Home = () => {
 
             <View style={{ justifyContent: 'center', alignItems: 'center', }}>
               <Pressable
-                style={styles.navButton}
+                style={styles.navButtonTwo}
                 onPress={() => {
                   router.push('/receive-bgl')
                 }}
@@ -91,7 +101,7 @@ const Home = () => {
             </View>
 
             <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-              <Pressable style={styles.navButton}>
+              <Pressable style={styles.navButtonThree}>
                 <SwitchNetworks />
               </Pressable>
               <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
@@ -153,7 +163,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE
   },
   balanceContainer: {
-    backgroundColor: '#A179FC',
+    backgroundColor: COLORS.ACCENT,
+    opacity: 0.9,
     flexDirection: 'column',
     minHeight: 390,
     borderBottomLeftRadius: 50,
@@ -181,14 +192,32 @@ const styles = StyleSheet.create({
 
     elevation: 3,
   },
-  navButton: {
-    backgroundColor: '#C6B3F0',
+  navButtonOne: {
+    backgroundColor: '#FF376B',
     height: 65,
     width: 65,
     borderRadius: 32.5,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.6
+    opacity: 0.5
+  },
+  navButtonTwo: {
+    backgroundColor: '#FFEB56',
+    height: 65,
+    width: 65,
+    borderRadius: 32.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.5
+  },
+  navButtonThree: {
+    backgroundColor: '#40FF21',
+    height: 65,
+    width: 65,
+    borderRadius: 32.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.5
   },
   assetContainer: {
     backgroundColor: COLORS.WHITE,

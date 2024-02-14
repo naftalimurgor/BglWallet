@@ -12,6 +12,7 @@ import {
   Poppins_300Light,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins'
+import { useStorageState } from './hooks/useStorageState'
 
 type SlideItem = {
   item: {
@@ -49,12 +50,21 @@ const slides = [
 
 const OnboardSlider = () => {
 
+  const [item, setItem] = useStorageState('user')
   const [fontsLoaded] = useFonts({
     Poppins_500Medium,
     Poppins_400Regular,
     Poppins_300Light,
     Poppins_700Bold,
   })
+
+  React.useEffect(() => {
+    if (item[1]) {
+      router.push('/(home)/')
+    } else {
+      router.replace('/create-new-wallet/')
+    }
+  }, [])
 
   const renderNextButton = () => {
     return (
@@ -77,7 +87,7 @@ const OnboardSlider = () => {
   }
 
   const onSkipSlider = () => {
-    router.replace('/(app)/create-new-wallet')
+    router.replace('/(home)/')
   }
 
   // @todo: render as pagination in order to customize the slider dots position to 'absolute'
@@ -180,7 +190,7 @@ const styles = StyleSheet.create({
   activeDotStyle: {
     width: 15,
     height: 7,
-    borderColor: '#824FF4',
+    borderColor: COLORS.ACCENT,
     borderWidth: 2,
     borderRadius: 15
   },

@@ -8,11 +8,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "backgroundColor": "#824FF4"
+      "backgroundColor": "#FFBA0A"
     },
     "androidStatusBar": {
-      "backgroundColor": "#824FF4",
-      "translucent": false
+      "backgroundColor": "#FFBA0A",
+      "translucent": true
     },
     "assetBundlePatterns": [
       "**/*"
