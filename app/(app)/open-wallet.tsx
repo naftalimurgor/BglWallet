@@ -60,7 +60,7 @@ const OpenWallet = () => {
         </Text>
         <View style={styles.submitButtonContainer}>
           <Pressable style={styles.submitButton} onPress={() => {
-            router.push('/(home)/')
+            router.replace('/(home)/')
           }}>
             <Text style={styles.submitButtonText}>Open Wallet</Text>
           </Pressable>

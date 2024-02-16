@@ -4,17 +4,25 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   state: 'idle',
-  walletObj: {
-    accounts: [],
-    seedphrase: "Place Holder seedphrase",
+  wallet: {
+    address: null,
+    privateKey: null,
+    mnemonic: null
   },
   auth: {
     email: null,
     token: null,
     uid: null,
     auth: false
+  },
+  user: null,
+  installState: 'first_time',
+  dashboard: {
+    balance: null,
+    bglInfo: null
   }
 }
+
 const walletSlice = createSlice({
   name: 'wallet',
   initialState,
@@ -24,14 +32,17 @@ const walletSlice = createSlice({
     },
 
     createWallet: (state, action) => {
-      state.walletObj = action.payload
+      state.wallet = action.payload
     },
 
     loadWallet: (state, action) => {
 
     },
-    loadWalletDashboard: (state, action) => {
-
+    installState: (state, action) => {
+      state.installState = action.payload
+    },
+    loadDashboard: (state, action) => {
+      state.dashboard = action.payload
     }
 
   }
@@ -39,11 +50,11 @@ const walletSlice = createSlice({
 })
 
 // thunks 
-const walletApi = createAsyncThunk('/wallet/api', async () => {
-  return async function walletLoadThunk(email: string, password: string) {
-    // code ommitted, reffer to the tutorial
-  }
-})
+// const walletApi = createAsyncThunk('/wallet/api', async () => {
+//   return async function walletLoadThunk(email: string, password: string) {
+//     // code ommitted, reffer to the tutorial
+//   }
+// })
 
 // sample thunk
 // export function fetchToDoById(id) {
@@ -56,7 +67,7 @@ const walletApi = createAsyncThunk('/wallet/api', async () => {
 //   }
 // }
 // actions
-export const { createWallet, loadWallet, createAccount } = walletSlice.actions
+export const { createWallet, loadWallet, createAccount, installState, loadDashboard } = walletSlice.actions
 
 // reducer
 export default walletSlice.reducer

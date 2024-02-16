@@ -1,6 +1,6 @@
-
+// @ts-nocheck
 import AvatarIcon from '@/components/Menu'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { COLORS } from '../COLORS'
 import BitgesellLogoBlack from '@/components/BitgesellIconBlack'
@@ -9,30 +9,67 @@ import ReceiveIcon from '@/components/ReceiveIcon'
 import ReceiveBGL from '@/components/ReceiveBGL'
 import SwitchNetworks from '@/components/SwitchNetworks'
 import { Redirect, router } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
-import { useStorageState } from '../hooks/useStorageState'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadDashboard } from '@/features/wallet/walletSlice'
+
+const Loader = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>loading...</Text>
+    </View>
+  )
+}
 
 const Home = () => {
-  // first page(dashboard for the application)
-  // revisit and perfect this as would be the selling point for the app
-  // try as much as possible to make it look like KCB app dashboard page with sliding carousel
-  // in creativity, sky is the limit
-  const [item, setStorage] = useStorageState('user')
+  const dispatch = useDispatch()
+  const [isLoading, setisLoading] = useState(true)
+  // @ts-ignore
+  const wallet = useSelector(state => state.wallet.wallet)
+  const currentAddress = wallet.address
+  const [dashboard, setdashboard] = React.useState(null)
   React.useEffect(() => {
-    if (item) {
-      router.push('/(home)/')
-    } else {
-      router.replace('/open-wallet/')
-    }
-  }, [])
+    setisLoading(true)
+    const getDashBoardInfo = async () => {
+      const body = {
+        address: currentAddress,
+        addresses: [currentAddress],
+        token: 'dummy_token' // @todo: should go insider Bearer <token> authorization header
+      }
 
-  return (
-    <ScrollView style={styles.walletContainer}>
+      const res = await fetch(`https://us-central1-exglos-api.cloudfunctions.net/app/dashboard`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(body)
+      })
+      const dashboardInfo = await res.json()
+      const { balance, bglInfo } = dashboardInfo
+      setdashboard(dashboardInfo)
+      console.log(dashboardInfo);
+
+      dispatch(loadDashboard({balance, bglInfo }))
+      setisLoading(false)
+
+    }
+    getDashBoardInfo()
+    // @ts-ignore
+  }, [])
+  const dashboardInfo = useSelector(state => state.wallet.dashboard)
+  console.log('info: ',dashboardInfo);
+  
+  if (isLoading) {
+    return (
+      <Loader />
+    )
+  } else {
+    
+    return(<ScrollView style={styles.walletContainer}>
       {/* <StatusBar backgroundColor=COLORS.ACCENT /> */}
       <View style={styles.balanceContainer}>
         <View style={styles.headerContainer}>
-          <Text style={{ color: COLORS.WHITE }}>
-            b13agdGAFDemeczdfefgr3S
+          <Text style={{ color: COLORS.WHITE, fontSize: 10 }}>
+            {currentAddress}
           </Text>
           <Pressable style={{ maxHeight: 58, maxWidth: 58, margin: 21 }}
             onPress={() => { }}
@@ -44,7 +81,7 @@ const Home = () => {
           <View style={{ flexDirection: 'row' }}>
             <View>
               <Text style={{ color: COLORS.WHITE, }}>BGL</Text>
-              <Text style={{ color: COLORS.WHITE, fontWeight: '600', fontSize: 15 }}>6.0288</Text>
+              <Text style={{ color: COLORS.WHITE, fontWeight: '600', fontSize: 15 }}>{dashboardInfo.bglInfo?.bitgesell?.usd ? dashboardInfo.bglInfo?.bitgesell?.usd : 0.0124561} USD</Text>
             </View>
             <View style={{ marginLeft: 67 }}>
               <Text style={{ color: COLORS.WHITE, fontWeight: '500', fontSize: 11 }}>
@@ -81,7 +118,7 @@ const Home = () => {
               >
                 <MobileIcon />
               </Pressable>
-              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
+              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 0 }}>
                 SEND BGL
               </Text>
             </View>
@@ -95,7 +132,7 @@ const Home = () => {
               >
                 <ReceiveBGL />
               </Pressable>
-              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
+              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 0 }}>
                 RECEIVE BGL
               </Text>
             </View>
@@ -104,7 +141,7 @@ const Home = () => {
               <Pressable style={styles.navButtonThree}>
                 <SwitchNetworks />
               </Pressable>
-              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 14 }}>
+              <Text style={{ color: COLORS.BLACK_ACCENT, fontSize: 12, marginTop: 0 }}>
                 SWITCH ACCOUNTS
               </Text>
             </View>
@@ -122,7 +159,8 @@ const Home = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between'
-          }}>
+          }}
+          >
             <Pressable
               style={{
                 backgroundColor: '#F5F5F5',
@@ -140,7 +178,7 @@ const Home = () => {
             <Text style={{ fontWeight: '600' }}>BITGESELL</Text>
             <View style={{ margin: 15 }}>
               <Text style={{ fontWeight: '600' }}>
-                $7,367.78
+                {dashboardInfo.balance.data[currentAddress].confirmed}
               </Text>
               <Text style={{ fontWeight: '500', color: '#888888' }}>
                 +2.32%
@@ -151,8 +189,8 @@ const Home = () => {
           </View>
         </View>
       </View>
-    </ScrollView>
-  )
+    </ScrollView>)
+  }
 }
 
 export default Home
@@ -160,7 +198,8 @@ export default Home
 const styles = StyleSheet.create({
   walletContainer: {
     flex: 1,
-    backgroundColor: COLORS.WHITE
+    backgroundColor: COLORS.WHITE,
+    width: '100%'
   },
   balanceContainer: {
     backgroundColor: COLORS.ACCENT,
@@ -180,7 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     borderRadius: 24,
     minHeight: 232,
-    minWidth: 335,
+    minWidth: '100%',
     marginTop: -130,
     shadowColor: "#000",
     shadowOffset: {
@@ -193,36 +232,36 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   navButtonOne: {
-    backgroundColor: '#FF376B',
+    // backgroundColor: '#FFBA0A',
     height: 65,
     width: 65,
     borderRadius: 32.5,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.5
+    // opacity: 0.2
   },
   navButtonTwo: {
-    backgroundColor: '#FFEB56',
+    // backgroundColor: '#FFBA0A',
     height: 65,
     width: 65,
     borderRadius: 32.5,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.5
+    // opacity: 0.5
   },
   navButtonThree: {
-    backgroundColor: '#40FF21',
+    // backgroundColor: '#FFBA0A',
     height: 65,
     width: 65,
     borderRadius: 32.5,
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.5
+    // opacity: 0.5
   },
   assetContainer: {
     backgroundColor: COLORS.WHITE,
     minHeight: 80,
-    minWidth: 335,
+    minWidth: '100%',
     borderRadius: 15,
     padding: 18,
     shadowColor: "#000",

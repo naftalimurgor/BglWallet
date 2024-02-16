@@ -9,8 +9,12 @@ import MobileIcon from '@/components/Mobile'
 import ReceiveBGL from '@/components/ReceiveBGL'
 import SwitchNetworks from '@/components/SwitchNetworks'
 import { router } from 'expo-router'
+import { useSelector } from 'react-redux'
 
 const Wallet = () => {
+  // @ts-ignore
+  const dashboardInfo = useSelector(state => state.wallet.dashboard)
+
   return (
     <ScrollView style={styles.walletContainer}>
       <View style={styles.balanceContainer}>
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
     marginBottom: 22,
   },
   navButton: {
-    backgroundColor: '#C6B3F0',
+    backgroundColor: '#FFEB56',
     height: 65,
     width: 65,
     borderRadius: 32.5,

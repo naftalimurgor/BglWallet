@@ -23,22 +23,10 @@ const SaveSeedPhrase = () => {
     Poppins_700Bold
   })
 
-  const [wallet, setWallet] = useState(null)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    async function _createWallet() {
-      const wallet = await createNewWallet()
-      // @ts-ignore
-      dispatch(wallet)
-      // @ts-ignore
-      setWallet(wallet)
-    }
-  
-  }, )
-  
   // @ts-ignore
-  const walletOj = useSelector(state => state.wallet.walletObj)
+  const wallet = useSelector(state => state.wallet.wallet)
   console.log('state auth object:', wallet)
 
 
@@ -57,12 +45,13 @@ const SaveSeedPhrase = () => {
       </View>
       <View style={styles.createWalletForm}>
         <Text style={[styles.inputLabel, { fontFamily: fontsLoaded ? 'Poppins_400Regular' : '' }]}>
-          Secret Phrase/Mneomic
+          Secret Phrase/Mnemonic
         </Text>
         <TextInput
           editable={false}
-          value={wallet.seedphrase}
+          value={wallet.mnemonic}
           style={styles.passwordInput}
+          multiline={true}
           autoCorrect={false}
         />
 
@@ -121,7 +110,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingEnd: 10,
+    color: COLORS.BLACK
   },
 
   inputLabel: {
@@ -132,7 +123,7 @@ const styles = StyleSheet.create({
   passwordInput: {
     width: 300,
     fontSize: 16,
-    height: 81,
+    height: 150,
     // marginRight: 28,
     borderColor: COLORS.WHITE004,
     borderStyle: 'solid',

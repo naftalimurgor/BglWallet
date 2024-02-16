@@ -7,6 +7,6 @@ export default function Root() {
   return (
     <Provider store={store}>
       <Slot />
-    </Provider>
+    </Provider >
   );
 }

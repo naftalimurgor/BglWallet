@@ -23,6 +23,7 @@ import { useStorageState } from '@/app/hooks/useStorageState'
 import { useDispatch, useSelector } from 'react-redux'
 import { createAccount, createWallet } from '@/features/wallet/walletSlice'
 import Toast from 'react-native-toast-message'
+import { setItemAsync } from 'expo-secure-store'
 
 type User = {
   token: string
@@ -69,20 +70,19 @@ const CreateNewWallet = () => {
       const authObj = await res.json()
 
       if (authObj.uid && authObj.auth) {
-        const user = { ...authObj, email }
-        console.log(user)
-        setStorage(JSON.stringify(user))
+        const user = { ...authObj, email, sessionValid: true, expiry: null }
+        // await setItemAsync('user', JSON.stringify({token: user.token}))
 
+        const wallet = authObj?.wallet
         dispatch(createAccount(user))
-        await initWallet(authObj.uid, email).then(() => {
-          // setStorage(authObj)
-          dispatch(createWallet({ wallets: [], seedphrase: 'place holder seedphrase!' }))
-          router.push('/save-wallet-phrase')
-        })
+        dispatch(createWallet(wallet))
+        router.push('/save-wallet-phrase')
+
       }
       if (!authObj.auth) {
         displayToast('Email address already in use, Use another email address', 'error')
         setIsSubmitting(submitting => !submitting)
+        console.log(authObj);
 
       }
 

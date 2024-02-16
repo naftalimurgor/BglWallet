@@ -12,7 +12,6 @@ import {
   Poppins_300Light,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins'
-import { useStorageState } from './hooks/useStorageState'
 
 type SlideItem = {
   item: {
@@ -29,20 +28,20 @@ const slides = [
     key: 'one',
     title: 'Research and select a wallet',
     text: 'Start by researching different cryptocurrency wallets available in the market. Consider factors such as security.',
-    image: require('@/assets/step1.png'),
+    image: require('@/assets/stepOne.png'),
     backgroundColor: '#fff',
   },
   {
     key: 'two',
     title: 'Manage all your assets in one place',
     text: 'Seamlessly manage all your assets in one secure place',
-    image: require('@/assets/step2.png'),
+    image: require('@/assets/stepTwo.png'),
     backgroundColor: '#fff',
   },
   {
     key: 'three',
     title: 'Keep your wallet app up to date',
-    image: require('@/assets/step3.png'),
+    image: require('@/assets/stepThree.png'),
     text: 'Regularly update your wallet software to ensure you have the latest security patches and bug fixes.',
     backgroundColor: '#fff',
   }
@@ -50,7 +49,6 @@ const slides = [
 
 const OnboardSlider = () => {
 
-  const [item, setItem] = useStorageState('user')
   const [fontsLoaded] = useFonts({
     Poppins_500Medium,
     Poppins_400Regular,
@@ -58,13 +56,6 @@ const OnboardSlider = () => {
     Poppins_700Bold,
   })
 
-  React.useEffect(() => {
-    if (item[1]) {
-      router.push('/(home)/')
-    } else {
-      router.replace('/create-new-wallet/')
-    }
-  }, [])
 
   const renderNextButton = () => {
     return (
@@ -87,7 +78,7 @@ const OnboardSlider = () => {
   }
 
   const onSkipSlider = () => {
-    router.replace('/(home)/')
+    router.push('/(home)/')
   }
 
   // @todo: render as pagination in order to customize the slider dots position to 'absolute'
@@ -119,13 +110,14 @@ const OnboardSlider = () => {
 
   return (
     <AppIntroSlider
+      style={{ backgroundColor: COLORS.WHITE }}
       renderItem={renderSlides}
       data={slides}
       onDone={onDone}
       activeDotStyle={styles.activeDotStyle}
       dotStyle={styles.dotStyle}
       renderNextButton={renderNextButton}
-      renderDoneButton={renderDoneButton}   
+      renderDoneButton={renderDoneButton}
     />
   )
 }

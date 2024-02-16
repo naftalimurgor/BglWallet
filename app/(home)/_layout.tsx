@@ -2,10 +2,14 @@ import { Drawer } from 'expo-router/drawer';
 import { StyleSheet, Text } from 'react-native';
 import { COLORS } from '../COLORS';
 import { Redirect } from 'expo-router';
+import { Provider } from 'react-redux';
+import { store } from '@/features/store';
 
 export default function Layout() {
 
   return (
+    <Provider store={store}>
+
     <Drawer>
       <Drawer.Screen
         name="index"
@@ -62,6 +66,7 @@ export default function Layout() {
         }}
       />
     </Drawer>
+    </Provider>
   );
 }
 
